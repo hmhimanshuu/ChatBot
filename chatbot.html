@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chatbot</title>
+  
+  <style>
+    body {
+      font-family: "Open Sans", sans-serif;
+      background-image: url('https://fcit.usf.edu/matrix/wp-content/uploads/2016/12/BotBackground-2-Wide.jpg'); /* Add your background image */
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    
+    #chat-window {
+      width: 80%;
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: rgba(255, 255, 255, 0.8); /* Slight transparency for readability */
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 50px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+    }
+    
+    #chat-messages {
+      padding: 10px;
+      margin-bottom: 10px;
+      max-height: 400px; /* Limit the message container height and add scrolling */
+      overflow-y: auto;
+    }
+    
+    #chat-form {
+      display: flex;
+      align-items: center;
+    }
+    
+    #chat-input {
+      flex-grow: 1;
+      padding: 10px;
+      margin-right: 10px;
+      border-radius: 10px;
+      border: 1px solid #000000;
+    }
+    
+    button[type="submit"] {
+      padding: 10px 20px;
+      border-radius: 10px;
+      background-color: #fff200;
+      color: #000000;
+      border: none;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer; /* Add pointer cursor to the button */
+    }
+    .bot-message {
+      font-family: "Gill Sans", sans-serif;
+      background-color: #ffffff;
+      text-align: justify;
+      padding: 15px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      font-style: bold; /* Use 'font-weight' instead of 'font-style' */
+      justify-content: flex-start; /* Align bot messages to the left */
+    }
+    
+    .user-message {
+      font-family: "Gill Sans", sans-serif;
+      background-color: #f4f4f4;
+      text-align: justify;
+      padding: 15px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      font-weight: bold; /* Use 'font-weight' instead of 'font-style' */
+      justify-content: flex-end; /* Align user messages to the right */
+    }
+    .user-message img,
+    .bot-message img {
+      width: 40px;
+      height: 40px;
+      margin-right: 20px;
+    }
+    @media only screen and (max-width: 400px) {
+      #chat-window {
+        width: 90%;
+      }
+    }
+    .main-title {
+      font-size: 2.0rem;
+      text-align: center;
+      font-family: "Gill Sans", "Arial Narrow", Arial, sans-serif;
+      margin-bottom: 0.5rem;
+      color: #5abdfe;
+      font-weight: bold; /* Use 'font-weight' instead of 'font-style' */
+    }
+  </style>
+</head>
+<body>
+  <div id="chat-window">
+    <div class="main-title">Welcome to HIMANSHU GPT</div>
+    <div id="chat-messages"></div>
+    <form id="chat-form">
+      <input
+        type="text"
+        id="chat-input"
+        autocomplete="off"
+        placeholder="Type your message here"
+        required
+      />
+      <button type="submit">Send</button>
+    </form>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.2.3/axios.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // JavaScript code for auto-scrolling chat messages
+    const chatMessages = document.getElementById("chat-messages");
+
+    function scrollToBottom() {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Scroll to the bottom initially
+    scrollToBottom();
+
+    // Function to add a new message to the chat and auto-scroll into view
+    function addMessage(message, isUser) {
+      const messageDiv = document.createElement("div");
+      messageDiv.classList.add(isUser ? "user-message" : "bot-message");
+      messageDiv.textContent = message;
+      chatMessages.appendChild(messageDiv);
+
+      // Scroll the new message into view
+      messageDiv.scrollIntoView({ behavior: "smooth" });
+    }
+  </script>
+</body>
+</html>
